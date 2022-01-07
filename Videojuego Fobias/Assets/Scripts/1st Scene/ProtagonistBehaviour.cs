@@ -157,6 +157,7 @@ public class ProtagonistBehaviour : MonoBehaviour
 
                 else if (collision.gameObject.name == "WP3")
                 {
+                    /*
                //     Debug.Log("WP3");
                     keepwalking = false;
                     animator.SetBool("isWalking", false);
@@ -165,7 +166,7 @@ public class ProtagonistBehaviour : MonoBehaviour
                     animator.SetBool("isWalking", true);
                     animator.SetBool("isIdle", false);
                     keepwalking = true;
-
+                    */
                 }
             }
         }
