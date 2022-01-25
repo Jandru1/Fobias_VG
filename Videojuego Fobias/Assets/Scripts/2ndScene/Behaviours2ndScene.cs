@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Behaviours2ndScene : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class Behaviours2ndScene : MonoBehaviour
     bool HasChosenOption = false;
     public WPActor WairtressScript;
 
-    public static bool HasDoneBothSituations = false;
+    public static bool HasDoneBothSituations;
     UI SayThat;
     // Start is called before the first frame update
     void Start()
     {
+        HasDoneBothSituations = false;
         SayThat = GetComponent<UI>();
         StartCoroutine(WaitForCorrectCamera());   
     }
@@ -30,18 +32,18 @@ public class Behaviours2ndScene : MonoBehaviour
     IEnumerator WaitForCorrectCamera()
     {
         yield return new WaitForSeconds(23);
-        if (!Solutions.PresentedHerself) StartCoroutine(AlbaAsksForMyName());
+        if (!ResultsScript.PresentedHerself) StartCoroutine(AlbaAsksForMyName());
         else StartCoroutine(CarlosWantsCofee());
     }
 
     IEnumerator AlbaAsksForMyName()
     {
-        AlbaAnimator.SetBool("isTalking", true);
+        AlbaAnimator.SetBool("isTalking2", true);
         SayThat.SayThat("Alba: Oye, ¿y tú cómo te llamas?");
         yield return new WaitForSeconds(3);
-        AlbaAnimator.SetBool("isTalking", false);
+        AlbaAnimator.SetBool("isTalking2", false);
         ProtagonistAnimator.SetBool("isTalking", true);
-        SayThat.PresentYourself();
+        SayThat.ProtagonistSayThat("Me llamo "+ Beginning.Name);
         yield return new WaitForSeconds(3);
         ProtagonistAnimator.SetBool("isTalking", false);
 
@@ -51,12 +53,12 @@ public class Behaviours2ndScene : MonoBehaviour
     IEnumerator CarlosWantsCofee()
     {
         //UISayThat.SayThat("Los dos de aquí enfrente me han propuesto ir a tomar algo al bar ahora");
-        CarlosAnimator.SetBool("isTalking", true);
+        CarlosAnimator.SetBool("isTalking2", true);
         SayThat.SayThat("Carlos: Puede que me pida otro cafe. Me tengo que levantar a las 06:00 cada día");
         yield return new WaitForSeconds(3);
         SayThat.SayThat("Carlos: para llegar a la uni y estoy muerto de sueño");
         yield return new WaitForSeconds(3);
-        CarlosAnimator.SetBool("isTalking", false);
+        CarlosAnimator.SetBool("isTalking2", false);
 
         StartCoroutine(SaraIsLazy());
     }
@@ -64,12 +66,12 @@ public class Behaviours2ndScene : MonoBehaviour
 
     IEnumerator SaraIsLazy()
     {
-        SaraAnimator.SetBool("isTalking", true);
+        SaraAnimator.SetBool("isTalking2", true);
         SayThat.SayThat("Sara: Uff... ¡Qué pereza! Yo por suerte tengo el bus delante de casa");
         yield return new WaitForSeconds(3);
         SayThat.SayThat("Sara: y en 20 minutos llego");
         yield return new WaitForSeconds(3);
-        SaraAnimator.SetBool("isTalking", false);
+        SaraAnimator.SetBool("isTalking2", false);
 
         StartCoroutine(AlbaSame());
     }
@@ -94,7 +96,7 @@ public class Behaviours2ndScene : MonoBehaviour
         if (!SayThat.HasExceededTimer())
         {
             ProtagonistAnimator.SetBool("isTalking", true);
-            if (leftpressed) SayThat.ProtagonistSayThat("Tú: jajaja lo mío tampoco es madurgar. ¡Qúe fuerza de voluntad Carlos!");
+            if (leftpressed) SayThat.ProtagonistSayThat("Tú: jajaja lo mío tampoco es madrugar. ¡Qúe fuerza de voluntad Carlos!");
             else SayThat.ProtagonistSayThat("Tú: Pues yo soy de levantarme pronto, así aprovecho el día");
             yield return new WaitForSeconds(3);
             ProtagonistAnimator.SetBool("isTalking", false);
@@ -114,10 +116,10 @@ public class Behaviours2ndScene : MonoBehaviour
 
     IEnumerator AlbaForDiscard()
     {
-        AlbaAnimator.SetBool("isTalking", true);
+        AlbaAnimator.SetBool("isTalking3", true);
         SayThat.SayThat("Alba: Pues un poco por descarte, si te digo la verdad...");
         yield return new WaitForSeconds(3);
-        AlbaAnimator.SetBool("isTalking", false);
+        AlbaAnimator.SetBool("isTalking3", false);
 
         StartCoroutine(SaraVocational());
     }
@@ -172,22 +174,22 @@ public class Behaviours2ndScene : MonoBehaviour
 
     IEnumerator SaraLikesTheVarietyOfReasons()
     {
-        SaraAnimator.SetBool("isTalking", true);
+        SaraAnimator.SetBool("isTalking2", true);
         SayThat.SayThat("Sara: Veo que hay variedad de motivos, ¡muy bien!");
         yield return new WaitForSeconds(3);
-        SaraAnimator.SetBool("isTalking", false);
+        SaraAnimator.SetBool("isTalking2", false);
 
         StartCoroutine(CarlosWantsTheBill());
     }
 
     IEnumerator CarlosWantsTheBill()
     {
-        CarlosAnimator.SetBool("isTalking", true);
+        CarlosAnimator.SetBool("isTalking2", true);
         SayThat.SayThat("Carlos: No quiero ser aguafiestas, pero la próxima clase empieza en 5 minutos...");
         yield return new WaitForSeconds(3);
         SayThat.SayThat("Carlos: Deberíamos irnos ya");
         yield return new WaitForSeconds(3);
-        CarlosAnimator.SetBool("isTalking", false);
+        CarlosAnimator.SetBool("isTalking2", false);
 
         StartCoroutine(AlbaSaysItsTrue());
     }
@@ -239,7 +241,7 @@ public class Behaviours2ndScene : MonoBehaviour
     {
         AlbaAnimator.SetBool("isTalking", true);
         SayThat.SayThat("Alba: ¡Perfecto! Llegaremos a tiempo");
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(3);
         AlbaAnimator.SetBool("isTalking", false);
         EndScene();
     }
@@ -249,5 +251,14 @@ public class Behaviours2ndScene : MonoBehaviour
         Animator FadeAnimator = GameObject.FindGameObjectWithTag("Panel").GetComponent<Animator>();
         FadeAnimator.SetBool("FadeIn", true);
         FadeAnimator.SetBool("FadeOut", false);
+        StartCoroutine(ChangeToQuestionnaireScene());
+
+    }
+
+    IEnumerator ChangeToQuestionnaireScene()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("QuestionnaireScene");
+
     }
 }

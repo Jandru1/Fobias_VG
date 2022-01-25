@@ -14,7 +14,7 @@ public class CarlosBehaviour : MonoBehaviour
     float z;
     int i = 0;
 
-    float speed = 1f;
+    public float speed = 1f;
     public GameObject targetGameObject;
     private Transform target;
     private GameObject Objeto;
@@ -24,6 +24,7 @@ public class CarlosBehaviour : MonoBehaviour
 
     private bool firstdone = false;
 
+    bool isWoman = true;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class CarlosBehaviour : MonoBehaviour
         }
         else
         {
+            isWoman = false;
             GameObject.FindGameObjectWithTag("Woman").SetActive(false);
             SayThat = GameObject.FindGameObjectWithTag("Man").GetComponent<UI>();
         }
@@ -70,30 +72,31 @@ public class CarlosBehaviour : MonoBehaviour
             }
         }
     }
+
+    IEnumerator Coroutine1()
+    {
+        //EMPIEZO AQUI
+        yield return new WaitForSeconds(16);
+        animator.SetBool("StartsSitted", false);
+        animator.SetBool("StandsUp", true);
+        StartCoroutine(Coroutine2());
+    }
+
     IEnumerator TalkWhileWalking()
     {
         animator.SetBool("isTalking", true);
-        SayThat.SayThat("Carlos: ¡Hola chicas! Soy Carlos ¿Qúe tal la primera clase?");
+        if(isWoman) SayThat.SayThat("Carlos: ¡Hola chicas! Soy Carlos ¿Qúe tal la primera clase?");
+        else SayThat.SayThat("Carlos: ¡Hola chicos! Soy Carlos ¿Qúe tal la primera clase?");
         yield return new WaitForSeconds(3);
         SayThat.SayThat("Carlos: ¿Os apuntáis a tomar algo ahora entre clase y clase?");
         yield return new WaitForSeconds(3);
         animator.SetBool("isTalking", false);
         ++j;
     }
-    IEnumerator Coroutine1()
-    {
-        //EMPIEZO AQUI
-        yield return new WaitForSeconds(15);
-        //Debug.Log("Ya han pasado 20s");
-        animator.SetBool("StartsSitted", false);
-        animator.SetBool("StandsUp", true);
-        StartCoroutine(Coroutine2());
 
-
-    }
     IEnumerator Coroutine2()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         // Debug.Log("entro despues de esperar");
        // Debug.Log(x + " " + y + " " + z);
         animator.SetBool("StandsUp", false);

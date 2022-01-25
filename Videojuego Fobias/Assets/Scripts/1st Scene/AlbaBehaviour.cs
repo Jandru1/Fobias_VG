@@ -10,7 +10,7 @@ public class AlbaBehaviour : MonoBehaviour
     UI UISayThat;
 
     //WPA
-    float speed = 1f;
+    public float speed = 1f;
     public GameObject targetGameObject;
     private Transform target;
     private GameObject Objeto;
@@ -74,6 +74,7 @@ public class AlbaBehaviour : MonoBehaviour
        // Debug.Log("Ya han pasado 5s");
         animator.SetBool("isSitting", false);
         animator.SetBool("isTalkingSitted", true);
+
         UISayThat.SayThat("Alba: ¡Madre mía, es el primer día de clase y ya nos han puesto trabajos");
         yield return new WaitForSeconds(3);
         UISayThat.SayThat("Alba: y nos han dado fechas de exámenes! Ya me habían dicho que ");
@@ -82,24 +83,21 @@ public class AlbaBehaviour : MonoBehaviour
         yield return new WaitForSeconds(3);
         UISayThat.SayThat("Alba: más tranquilo. ¡Qué nerviosa me he puesto!");
         yield return new WaitForSeconds(3);
+        animator.SetBool("isSitting", true);
+        animator.SetBool("isTalkingSitted", false);
         StartCoroutine(Coroutine2());
       
     }
     IEnumerator Coroutine2()
     {
-        //waited = true;
-        yield return new WaitForSeconds(1);
-        //     Debug.Log("Y 5s mas");
-        animator.SetBool("isSitting", true);
-        animator.SetBool("isTalkingSitted", false);
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(14.7f); //EAC EN principio eran 15, 14 para que se lo diga antes
         animator.SetBool("isSitting", false);
-        animator.SetBool("isTalkingSitted", true);
+        animator.SetBool("isTalking", true);
         UISayThat.SayThat("Alba: ¡Venga vale! Vamos");
         yield return new WaitForSeconds(3);
         animator.SetBool("isSitting", true);
-        animator.SetBool("isTalkingSitted", false);
-        yield return new WaitForSeconds(1);
+        animator.SetBool("isTalking", false);
+        yield return new WaitForSeconds(3.5f); //EAC con la correcion aterior sumo 2 segundos pa que tarde 1 más
         animator.SetBool("isSitting", false);
         animator.SetBool("StandsUp", true);
         yield return new WaitForSeconds(1);
@@ -138,7 +136,7 @@ public class AlbaBehaviour : MonoBehaviour
                 keepwalking = true;
             }
 
-            if (collision.gameObject.name == "WP4")
+            if (collision.gameObject.name == "WP4") //EAC ha de ser WP4
             {
                 StartCoroutine(TalkDuringWalk());
                 //animator.SetBool("isTalking", true);
