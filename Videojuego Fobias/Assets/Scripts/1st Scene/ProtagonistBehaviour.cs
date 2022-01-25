@@ -15,7 +15,7 @@ public class ProtagonistBehaviour : MonoBehaviour
     float mx, my, mz;
 
     //WPActor
-    private float speed = 1f;
+    public float speed = 1f;
     private bool WPActor = false;
     public GameObject targetGameObject;
     private Transform target;
@@ -85,9 +85,9 @@ public class ProtagonistBehaviour : MonoBehaviour
     }
     IEnumerator CoroutineStandUp()
     {
-        yield return new WaitForSeconds(36);//36
-        animator.SetBool("isSitting", false);
+        yield return new WaitForSeconds(36.6f);//36
         animator.SetBool("StartsSitted", false);
+        animator.SetBool("isSitting", false);
         animator.SetBool("StandsUp", true);
 
         yield return new WaitForSeconds(1);

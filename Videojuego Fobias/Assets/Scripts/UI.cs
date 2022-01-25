@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UI : MonoBehaviour
 {
-    public Text Op2Text;
-    public Text Op3Text;
-    public Text PresentationText;
-    public Text PresentationProtagonistText;
-    public Text PresentationImageText;
+    
+    public TextMeshProUGUI Op2Text;
+    public TextMeshProUGUI Op3Text;
+    public TextMeshProUGUI PresentationText;
+    public TextMeshProUGUI PresentationProtagonistText;
+    public TextMeshProUGUI PresentationImageText;
     public RawImage Op2Button;
     public RawImage Op3Button;
     public RawImage PresentationButton;
@@ -32,6 +34,10 @@ public class UI : MonoBehaviour
 
     bool LeftPressed = false;
 
+    int TalkScene = 1;
+
+    int i = 0;
+
     GameObject Canvas;
     // Start is called before the first frame update
     void Start()
@@ -51,31 +57,20 @@ public class UI : MonoBehaviour
 
         Name = Beginning.Name;
         Age = Beginning.Age;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.U))
-        {
-            Canvas.SetActive(true);
-        }
-        else if (Input.GetKey(KeyCode.Z))
-        {
-            Op2Text.text = "Derecha";
-            Op3Text.text = "Izquierda";
-        }
-
         if(Input.GetKey(KeyCode.Space) && (isVisible)){
             if (!ForPresentationOrWairtress) //Presentation
             {
-                Solutions.setPresentedHerself();
+                ResultsScript.PresentedHerself = true;
                 StartCoroutine(PresentationProtagonist3Seconds());
             }
             else //Wairtress
             {
-                Solutions.setCalledTheWairtress();
+                ResultsScript.CalledTheWairtess = true;
                 HasCalledWairtress = true;
                 HasChosenOption = true;
             }
@@ -88,6 +83,9 @@ public class UI : MonoBehaviour
 
         if(Input.GetKey(KeyCode.LeftArrow) & OptionsAreVisible)
         {
+            Debug.Log("TalkScene = " + TalkScene);
+            if (TalkScene == 1) ResultsScript.TalkInFirstScene = true;
+            else if (TalkScene == 2) ResultsScript.TalkInSecondScene = true;
             DesactiveOptions();
             LeftPressed = true;
             HasChosenOption = true;
@@ -97,6 +95,10 @@ public class UI : MonoBehaviour
     
         else if (Input.GetKey(KeyCode.RightArrow) & OptionsAreVisible)
         {
+            Debug.Log("TalkScene = " + TalkScene);
+
+            if (TalkScene == 1) ResultsScript.TalkInFirstScene = true;
+            else if (TalkScene == 2) ResultsScript.TalkInSecondScene = true;
             DesactiveOptions();
             LeftPressed = false;
             HasChosenOption = true;
@@ -123,7 +125,8 @@ public class UI : MonoBehaviour
     IEnumerator PresentationProtagonist3Seconds()
     {
         PresentationProtagonistText.enabled = true;
-        PresentationProtagonistText.text = "Hola, me llamo " + Name + " y tengo " + Age + " años";
+        if(Beginning.isWoman) PresentationProtagonistText.text = "Encantada, yo me llamo " + Name;
+        else PresentationProtagonistText.text = "Encantado, yo me llamo " + Name;
         animator.SetBool("isTalking", true);
         yield return new WaitForSeconds(3);
         animator.SetBool("isTalking", false);
@@ -189,12 +192,13 @@ public class UI : MonoBehaviour
 
     public void DesactiveOptions()
     {
-
+        Debug.Log("entro en desactive options");
         Op2Button.enabled = false;
         Op2Text.enabled = false;
         Op3Button.enabled = false;
         Op3Text.enabled = false;
         OptionsAreVisible = false;
+        //++TalkScene;
     }
 
     public void Set1stDecisions()
@@ -215,10 +219,16 @@ public class UI : MonoBehaviour
     }
     public void StartTheTimer()
     {
-        StartCoroutine(StartTimer(10f));
+        StartCoroutine(StartTimer(5f));
     }
     public IEnumerator StartTimer(float duration)
     {
+        if(i == 0)
+        {
+            ++i;
+            duration = 4.0f;
+        }
+
         TimerExceeded = false;
         MyTimer.enabled = true;
         fillImage.enabled = true;
@@ -237,13 +247,12 @@ public class UI : MonoBehaviour
         }
         MyTimer.enabled = false;
         fillImage.enabled = false;
-
+        ++TalkScene;
         DesactiveOptions();
         HasChosenOption = true;
         TimerExceeded = true;
         PresentationButton.enabled = false;
         PresentationImageText.enabled = false;
-
     }
 
     public bool LeftOptionChosen()

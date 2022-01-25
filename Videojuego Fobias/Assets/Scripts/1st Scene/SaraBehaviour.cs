@@ -15,7 +15,7 @@ public class SaraBehaviour : MonoBehaviour
     int i = 0;
     int j = 0;
 
-    float speed = 1f;
+    public float speed = 1f;
     public GameObject targetGameObject;
     private Transform target;
     private GameObject Objeto;
@@ -107,7 +107,7 @@ public class SaraBehaviour : MonoBehaviour
         animator.SetBool("isTalking", true);
         SayThat.SayThat("Sara: ¡Hola! ¿Qué tal?");
         yield return new WaitForSeconds(3);
-        SayThat.SayThat("Sara: Yo soy Sara. Veniros y así nos vamos conociendo!");
+        SayThat.SayThat("Sara: Yo soy Sara. ¡Veniros y así nos vamos conociendo!");
         yield return new WaitForSeconds(3);
         animator.SetBool("isTalking", false);
         ++j;

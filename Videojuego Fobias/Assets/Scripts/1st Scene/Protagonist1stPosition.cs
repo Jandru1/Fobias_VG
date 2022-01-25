@@ -25,7 +25,7 @@ public class Protagonist1stPosition : MonoBehaviour
         x = silla.transform.position.x;
         // silla.GetComponent<BoxCollider>().enabled = !silla.GetComponent<BoxCollider>().enabled;
         if (Beginning.isWoman) Character.transform.position = new Vector3(x, -0.05f, z - 0.05f);
-        else Character.transform.position = new Vector3(x, 0.05f, z + 0.01f);
+        else Character.transform.position = new Vector3(x, 0f, z + 0.01f);
 
         float ySilla = silla.transform.rotation.y;
         float xs = Character.transform.rotation.x;

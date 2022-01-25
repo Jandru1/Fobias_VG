@@ -18,7 +18,7 @@ public class Protagonist1stPosition2ndScene : MonoBehaviour
         z = silla.transform.position.z;
         y = silla.transform.position.y;
         x = silla.transform.position.x;
-        if (Beginning.isWoman) Character.transform.position = new Vector3(x - 0.4f, 2.2f, z - 0.4f);
+        if (Beginning.isWoman) Character.transform.position = new Vector3(x - 0.3f, 2.2f, z);// new Vector3(x - 0.4f, 2.2f, z - 0.4f);
         else Character.transform.position = new Vector3(x -0.3f, 2.2f, z);
         float ySilla = silla.transform.eulerAngles.y;
         float xs = Character.transform.rotation.x;
