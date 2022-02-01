@@ -136,6 +136,11 @@ public class ResultsScript : MonoBehaviour
     {
         PresentedHerself = true;
     }
+    
+    public void setNotPresentedHerself()
+    {
+        PresentedHerself = false;
+    }
 
     private void HacerDiagnosticoGlobal()
     {
@@ -256,6 +261,12 @@ public class ResultsScript : MonoBehaviour
         if (ValorGlobalDefinitivo >= 6 & ValorGlobalDefinitivo <= 8) DiagnosticoGlobalAlto = true;
         else if (ValorGlobalDefinitivo >= 3 & ValorGlobalDefinitivo <= 5) DiagnosticoGlobalMedio = true;
         else DiagnosticoGlobalBajo = true;
+
+
+        Debug.Log("EscenasAltasss " + EscenasAltasss.Count);
+        Debug.Log("EscenasMediasss " + EscenasMediasss.Count);
+        Debug.Log("EscenasBajasss " + EscenasBajasss.Count);
+
 
         if (DiagnosticoGlobalAlto) { Debug.Log("Escenas medias AL LLAMAR COUNT = " + EscenasMediasss.Count); WriteDiagnosticoAlto(); }
         else if (DiagnosticoGlobalMedio)WriteDiagnosticoMedio(); 
@@ -507,7 +518,7 @@ public class ResultsScript : MonoBehaviour
                            "dichas emociones se vean alteradas cuando el jugador se encuentra ante estas situaciones en la vida real. Se le recomendaría  " +
                            "que recurriera a ayuda ya que probablemente la necesite. "; */
 
-        Diagnostico.text = "En esta prueba se han detectado niveles de intesidad muy elevados de algunas emociones. Estos niveles de intensidad emocional " +
+        Diagnostico.text = "\n En esta prueba se han detectado niveles de intesidad muy elevados de algunas emociones. Estos niveles de intensidad emocional " +
             "indican malestar psicológico significativo en el jugador. En base a esto, se deduce que el jugador podría estar experimentando este nivel de " +
             "malestar en situaciones similares de la vida real. Se recomienda que el jugador acuda a un profesional.";
 
@@ -1087,6 +1098,10 @@ public class ResultsScript : MonoBehaviour
     IEnumerator PlayAgain()
     {
         yield return new WaitForSeconds(2);
+        PresentedHerself = false;
+        TalkInFirstScene = false;
+        TalkInSecondScene= false;
+        CalledTheWairtess= false;
         SceneManager.LoadScene("BeginScene");
     }
 

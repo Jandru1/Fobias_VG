@@ -16,6 +16,7 @@ TagManager:
   - Man
   - Timer2
   - Panel
+  - Alba
   layers:
   - Default
   - TransparentFX

@@ -19,15 +19,26 @@ public class FirstPosition : MonoBehaviour
         y = silla.transform.position.y;
         x = silla.transform.position.x;
         // silla.GetComponent<BoxCollider>().enabled = !silla.GetComponent<BoxCollider>().enabled;
-        Character.transform.position = new Vector3(x,0, z + 0.05f);
 
         float ySilla = silla.transform.rotation.y;
         float xs = Character.transform.rotation.x;
         float zs = Character.transform.rotation.z;
+        Debug.Log("Hola");
 
         Character.transform.rotation = Quaternion.Euler(new Vector3(xs, ySilla, zs));
 
- //       Camara.transform.position = new Vector3(Camara.transform.position.x, 1.1f, Camara.transform.position.z);
+        if(Character.tag == "Alba")
+        {
+            Debug.Log(Character.tag);
+            Character.transform.position = new Vector3(x, 0, z + 0.05f);
+        }
+        else
+        {
+            Debug.Log(Character.gameObject.tag);
+            Character.transform.position = new Vector3(x, 0, z + 0.05f);
+        }
+
+        //       Camara.transform.position = new Vector3(Camara.transform.position.x, 1.1f, Camara.transform.position.z);
 
         /*
         animator.SetBool("isIdle", false);

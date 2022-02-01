@@ -24,9 +24,12 @@ public class Beginning : MonoBehaviour
     public GameObject panel;
     Animator animator;
 
+    public TextMeshProUGUI IntroducirInfo;
+
     // Start is called before the first frame update
     void Start()
     {
+        IntroducirInfo.gameObject.SetActive(false);
         animator = panel.GetComponent<Animator>();
         BeginButton.onClick.AddListener(TaskOnClick);
         StartCoroutine(CoroutineWait3seconds());
@@ -52,10 +55,20 @@ public class Beginning : MonoBehaviour
             animator.SetBool("FadeIn", true);
             StartCoroutine(CoroutineChangeScene());
         }
-        else Debug.Log("Clikao pero empty");
+        else
+        {
+            StartCoroutine(PFIntroducirInfo());
+
+        }
 
     }
+    IEnumerator PFIntroducirInfo()
+    {
+        IntroducirInfo.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3);
+        IntroducirInfo.gameObject.SetActive(false);
 
+    }
     IEnumerator CoroutineChangeScene()
     {
         yield return new WaitForSeconds(2);

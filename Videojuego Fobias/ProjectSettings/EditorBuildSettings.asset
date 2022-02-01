@@ -14,9 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BarScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/Scenes/QuestionnaireScene2.unity
-    guid: 9dcb57adcbad8044a8e021b0f810f47b
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/ResultsScene.unity
     guid: b05a6c62465f59344bf28b9e02497503

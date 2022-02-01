@@ -21,18 +21,19 @@ public class FirstPosition2ndScene : MonoBehaviour
         // silla.GetComponent<BoxCollider>().enabled = !silla.GetComponent<BoxCollider>().enabled;
         //   Debug.Log("zSilla = " + zSilla + " xSilla = " + silla.transform.eulerAngles.x + " ySilla = "+ silla.transform.eulerAngles.y);
         float ys = silla.transform.eulerAngles.y;
+        Debug.Log("Con ys = " + ys + " el caracter es " + Character.name);
 
-        if(ys == 90)
+        if (ys == 90) //Carlos
         {
             Character.transform.position = new Vector3(x + 0.4f, 2.2f, z);
 
         }
-        else if (ys == 0)
+        else if (ys == 0) //Sara
         {
             Character.transform.position = new Vector3(x, 2.2f, z+0.4f);
 
         }
-        else if (ys == 180)
+        else if (ys == 180) //Alba
         {
             Character.transform.position = new Vector3(x,2.2f, z-0.4f);
 
